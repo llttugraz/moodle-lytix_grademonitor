@@ -1,0 +1,166 @@
+{{!
+  This file is part of Moodle - http://moodle.org/
+
+  Moodle is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  Moodle is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+  @template lytix_grademonitor/grademonitor
+
+  Lytix Grade Monitor
+
+  This template renders the actual content of the widget.
+
+  Classes required for JS:
+  * lytix_grademonitor/grademonitor
+
+  Context variables required for this template:
+  See example below.
+
+  Example context (json):
+  {
+    "table": [
+      {
+        "itemName": "Assignment 1",
+        "index": 0,
+        "average": "1",
+        "assessed": true,
+        "checked": true,
+        "optional": false,
+        "value": 66,
+        "weight": 15,
+        "estimation": 2,
+        "result": "4"
+     }
+    ],
+    "showAverage": 1,
+    "gradeCompletion": "40",
+    "currentGrade": "4",
+    "selfEstimation": "4",
+    "average": "2",
+    "goalSelection": [
+      {"grade": 1},
+      {"grade": 2, "selected": true},
+      {"grade": 3},
+      {"grade": 4}
+    ],
+    "schemeNotification": "The scheme has been updated on:  03/01/2022",
+    "goalStatus": "You are on track to achieving your goal. Keep on going, you can do it!"
+  }
+}}
+
+<div id='grade-goal' class='alert {{goalClass}} p-2 px-3 d-flex'>
+    <select id='grade-goal-selection' class='p-1 mr-3'>
+        <option value='0'>–</option>
+        {{#goalSelection}}
+        <option value='{{grade}}'{{#selected}} selected{{/selected}}>{{grade}}</option>
+        {{/goalSelection}}
+    </select>
+    <span>
+        <label class='font-weight-bold mb-0' for='grade-goal-selection'>{{#str}}goal, lytix_grademonitor{{/str}}</label><br>
+        <span id='goal-status'>{{goalStatus}}</span>
+    </span>
+</div>
+
+{{#schemeNotification}}
+<div class='alert alert-info d-inline-flex justify-content-between align-items-center p-2 px-3'>
+    <span>{{.}}</span>
+    <button id='dismiss-scheme-update' class='btn btn-outline-info btn-sm' type='button'>
+        {{#str}}dismiss, lytix_grademonitor{{/str}}
+    </button>
+</div>
+{{/schemeNotification}}
+
+<p class='alert alert-info p-2 px-3'>{{#str}}disclaimer, lytix_grademonitor{{/str}}</p>
+
+<div class='table-container'>
+    <table class='table table-striped table-sm text-center table-bordered'>
+        <colgroup>
+            <col style='width: 1em'>
+            <col style='width: 3.5em'>
+            <col class='name'>
+            {{#showAverage}}<col class='average'>{{/showAverage}} {{! width is set per CSS }}
+            <col style='width: 3.5em'>
+            <col style='width: 3em; border-left: 2px solid #ddd'>
+            <col style='width: 3.5em'>
+            <col>
+        </colgroup>
+
+        <thead class='text-uppercase'>
+            <tr>
+                <th rowspan='2'><abbr title='{{#str}}th_optional, lytix_grademonitor{{/str}}'>{{#str}}th_optional_abbr, lytix_grademonitor{{/str}}</abbr></th>
+                <th rowspan='2' class='text-right'><abbr title='{{#str}}th_weight, lytix_grademonitor{{/str}}'>{{#str}}th_weight_abbr, lytix_grademonitor{{/str}}</abbr></th>
+                <th rowspan='2' class='text-left'>{{#str}}th_name, lytix_grademonitor{{/str}}</th>
+                <th rowspan='2' class='class-average {{^showAverage}}d-none{{/showAverage}}'>{{#str}}th_average, lytix_grademonitor{{/str}}</th>
+                <th rowspan='2'>{{#str}}th_own_result, lytix_grademonitor{{/str}}</th>
+                <th colspan='3'>{{#str}}th_estimation, lytix_grademonitor{{/str}}</th>
+            </tr>
+            <tr>
+                <th><abbr title='{{#str}}th_include, lytix_grademonitor{{/str}}'>{{#str}}th_include_abbr, lytix_grademonitor{{/str}}</abbr></th>
+                <th>{{#str}}th_estimate, lytix_grademonitor{{/str}}</th>
+                <th>{{#str}}th_percent, lytix_grademonitor{{/str}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#table}}
+            <tr class='{{^checked}}unchecked{{/checked}}' data-index='{{index}}'>
+                <td>{{#optional}}+{{/optional}}</td>
+                <td class='text-right'>{{weight}}&thinsp;%</td>
+                <td class='text-left font-italic'>{{itemName}}</td>
+                <td class='class-average {{^showAverage}}d-none{{/showAverage}}'>{{#average}}{{.}}{{/average}}</td>
+                <td>
+                    {{#result}}
+                    <span class='font-weight-bold'>{{.}}</span>{{#optional}}{{#str}}points, lytix_grademonitor{{/str}}{{/optional}}
+                    {{/result}}
+                </td>
+                <td>
+                    <input type='checkbox' {{#checked}}checked{{/checked}} {{#result}}disabled{{/result}}>
+                </td>
+                <td class='estimation'>{{#estimation}}{{.}}{{#optional}}{{#str}}points, lytix_grademonitor{{/str}}{{/optional}}{{/estimation}}</td>
+                <td class='estimation-selection text-nowrap'>
+                    <div class='d-flex'>
+                        0&thinsp;%&nbsp;
+                        <input class='mb-0' type='range' min='0' max='100' value='{{value}}' step='10' name='{{index}}' {{#assessed}}disabled{{/assessed}} style='width: 100%'>&nbsp;
+                        100&thinsp;%
+                    </div>
+                </td>
+            </tr>
+            {{/table}}
+        </tbody>
+    </table>
+</div>
+
+<div class='d-flex justify-content-around'>
+    <p class='kpv'>
+        <span class='value'>{{gradeCompletion}}&thinsp;%</span><br>
+        <span>{{#str}}grade_completion, lytix_grademonitor{{/str}}</span>
+    </p>
+    <p class='kpv'>
+        <span class='value font-weight-bold'>{{currentGrade}}</span><br>
+        <span>{{#str}}current_grade, lytix_grademonitor{{/str}}</span><br>
+        <span class='class-average {{^showAverage}}d-none{{/showAverage}}'>{{#str}}class_average, lytix_grademonitor{{/str}}: {{average}}</span>
+    </p>
+    <p class='kpv'>
+        <span class='final-estimation value'>{{selfEstimation}}</span><br>
+        <span>{{#str}}self_estimation, lytix_grademonitor{{/str}}</span>
+    </p>
+</div>
+
+<p>{{#str}}legend, lytix_grademonitor{{/str}}</p>
+
+<div id='show-average-control' class='custom-control custom-switch'>
+    <input id='show-average' class='custom-control-input' type='checkbox' {{#showAverage}}checked{{/showAverage}}>
+    <label class='custom-control-label' for='show-average'>
+        {{#str}}show_average, lytix_grademonitor{{/str}}
+    </label>
+</div>

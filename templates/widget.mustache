@@ -1,0 +1,59 @@
+{{!
+  This file is part of Moodle - http://moodle.org/
+
+  Moodle is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  Moodle is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+  @template lytix_grademonitor/widget
+
+  Lytix Grade Monitor Widget
+
+  This template shows a table of graded activities alongside self-estimated results.
+
+  Classes required for JS:
+  * lytix_grademonitor/grademonitor
+  * lytix_grademonitor/teachers-view
+
+  Context variables required for this template:
+  See example below.
+
+  Example context (json):
+  {
+     "contextid": 0,
+     "courseid": 0,
+     "userid": 0,
+	  "locale": "de_utf8"
+  }
+}}
+
+<div id='grademonitor' class='widget loading {{^isteacher}}student{{/isteacher}}{{#isteacher}}teacher{{/isteacher}}'>
+    <h3>{{#str}} widget_name, lytix_grademonitor {{/str}}</h3>
+    <div class='content d-flex flex-column justify-content-around p-3 p-b-0'></div>
+</div>
+
+{{#isteacher}}
+{{#js}}
+    require(['lytix_grademonitor/teachers-details'], function(m) {
+        m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}');
+    });
+{{/js}}
+{{/isteacher}}
+
+{{^isteacher}}
+{{#js}}
+    require(['lytix_grademonitor/grademonitor'], function(m) {
+        m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}');
+    });
+{{/js}}
+{{/isteacher}}

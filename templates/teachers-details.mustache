@@ -1,0 +1,244 @@
+{{!
+  This file is part of Moodle - http://moodle.org/
+
+  Moodle is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  Moodle is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+  @template lytix_grademonitor/teachers-details
+
+  Lytix Grade Monitor – Teacher’s Detailes
+
+  This template renders a complex table showing the development of
+  students’s goals, self-estimations and grades over time.
+
+  Classes required for JS:
+  * lytix_grademonitor/teachers-details
+
+  Context variables required for this template:
+  See example below.
+
+  Example context (json):
+  {
+    "counts": [
+      [
+        {
+          "count": 6,
+          "percent": 6,
+          "grade": 4
+        }, {
+          "count": 52,
+          "percent": 53,
+          "grade": 3
+        }, {
+          "count": 34,
+          "percent": 34,
+          "grade": 2
+        }, {
+          "count": 7,
+          "percent": 7,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 1,
+          "percent": 1,
+          "grade": 5
+        }, {
+          "count": 13,
+          "percent": 14,
+          "grade": 4
+        }, {
+          "count": 35,
+          "percent": 38,
+          "grade": 3
+        }, {
+          "count": 33,
+          "percent": 35,
+          "grade": 2
+        }, {
+          "count": 11,
+          "percent": 12,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 10,
+          "percent": 10,
+          "grade": 5
+        }, {
+          "count": 33,
+          "percent": 33,
+          "grade": 4
+        }, {
+          "count": 34,
+          "percent": 34,
+          "grade": 3
+        }, {
+          "count": 16,
+          "percent": 16,
+          "grade": 2
+        }, {
+          "count": 7,
+          "percent": 7,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 7,
+          "percent": 7,
+          "grade": 4
+        }, {
+          "count": 52,
+          "percent": 53,
+          "grade": 3
+        }, {
+          "count": 33,
+          "percent": 34,
+          "grade": 2
+        }, {
+          "count": 6,
+          "percent": 6,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 3,
+          "percent": 4,
+          "grade": 5
+        }, {
+          "count": 31,
+          "percent": 43,
+          "grade": 4
+        }, {
+          "count": 9,
+          "percent": 13,
+          "grade": 3
+        }, {
+          "count": 20,
+          "percent": 28,
+          "grade": 2
+        }, {
+          "count": 9,
+          "percent": 12,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 12,
+          "percent": 12,
+          "grade": 5
+        }, {
+          "count": 36,
+          "percent": 36,
+          "grade": 4
+        }, {
+          "count": 35,
+          "percent": 35,
+          "grade": 3
+        }, {
+          "count": 13,
+          "percent": 13,
+          "grade": 2
+        }, {
+          "count": 4,
+          "percent": 4,
+          "grade": 1
+        }
+      ], [
+        {
+          "count": 30,
+          "percent": 71,
+          "grade": 3
+        }, {
+          "count": 12,
+          "percent": 29,
+          "grade": 2
+        }, {
+          "count": 0,
+          "percent": 0,
+          "grade": 1
+        }
+      ],
+      false,
+      false
+    ],
+    "labels": [ true, true, true ],
+    "percentages": [ 99, 81, 75, 98, 54, 30, 42, false, false ],
+    "weeks": [ 2, 1, 52 ],
+    "valueCount": 6,
+    "months": [
+      {
+        "width": 57,
+        "month": "Jan"
+      }, {
+        "width": 43,
+        "month": "Dec"
+      }
+    ]
+  }
+}}
+
+<div class='table-responsive m-b-1'>
+    <table class='table table-sm text-center borderless'>
+        <tr class='visualisation'>
+            <td></td>
+            {{#counts}}
+            <td>
+                <div class='h-100 d-flex flex-column'>
+                    {{#.}}
+                    <span style='height:{{percent}}%' data-count='{{count}}' class='grade-{{grade}} grade-segment d-inline-flex align-items-center justify-content-center'>{{grade}}</span>
+                    {{/.}}
+                </div>
+            </td>
+            {{/counts}}
+        </tr>
+        <tr class='font-italic'>
+            <td></td>
+            {{#labels}} {{! This is just an array of anything truthy (length == weeks). }}
+            <th class='font-weight-normal'>{{#str}}goal, lytix_grademonitor{{/str}}</th>
+            <th class='font-weight-normal'>
+                <abbr title='{{#str}}estimate, lytix_grademonitor{{/str}}'>{{#str}}estimate_abbr, lytix_grademonitor{{/str}}</abbr>
+            </th>
+            <th class='font-weight-normal'>{{#str}}grade, lytix_grademonitor{{/str}}</th>
+            {{/labels}}
+        </tr>
+        <tr class='percent'>
+            <th class='font-weight-bold text-right'>{{#str}}percent, lytix_grademonitor{{/str}}</th>
+            {{#percentages}}
+            <td>{{#.}}{{.}} %{{/.}}{{^.}}–{{/.}}</td>
+            {{/percentages}}
+        </tr>
+        <tr class='week'>
+            <th class='text-right'>
+                <abbr title='{{#str}}week, lytix_grademonitor{{/str}}'>{{#str}}week_abbr, lytix_grademonitor{{/str}}</abbr>
+            </th>
+            {{#weeks}}
+            <td colspan='3'>{{.}}</td>
+            {{/weeks}}
+        </tr>
+        <tr>
+            <th class='text-right'>{{#str}}month, lytix_grademonitor{{/str}}</th>
+            <td colspan='3' class='text-uppercase'><span>{{#str}}today, lytix_grademonitor{{/str}}</span></td>
+            <td colspan='{{valueCount}}' class='month text-uppercase p-0'>
+                <div class='d-flex h-100'>
+                    {{#months}}
+                    <span class='d-inline-flex align-items-center justify-content-center' style='width:{{width}}%'>{{month}}</span>
+                    {{/months}}
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{{#str}}teacher_description, lytix_grademonitor{{/str}}

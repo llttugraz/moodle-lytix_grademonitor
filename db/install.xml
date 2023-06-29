@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/lytix/modules/grademonitor/db" VERSION="20220209" COMMENT="XMLDB file for Moodle local/lytix/modules/grademonitor"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="lytix_grademonitor" COMMENT="Table to store individual information's about the grading monitor.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="goal" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="3" SEQUENCE="false" COMMENT="The desired grade for the entire course."/>
+        <FIELD NAME="scheme_update" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Timestamp for the last time the grading scheme changed."/>
+        <FIELD NAME="estimations" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Estimations for the grade items."/>
+        <FIELD NAME="show_others" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="1" SEQUENCE="false" COMMENT="Flag to show the grades from the other students"/>
+        <FIELD NAME="dismiss_notification" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Flag that stores if the user has read the notification or not."/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Unix timestamp of creation"/>
+        <FIELD NAME="future" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Default field for future json texts that can be added without a db update."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

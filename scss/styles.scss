@@ -1,0 +1,269 @@
+@use '../../../scss/colors' as *;
+
+#grademonitor {
+    col.average {
+        width: 3.5em;
+    }
+
+    thead {
+        line-height: 1.1;
+        font-size: .85em;
+    }
+
+    .table-container {
+        overflow: auto;
+        max-height: 60vh;
+    }
+
+    // Making cells sticky somehow erases borders: in Webkit and Blink only vertical borders, in Firefox all of them.
+    // Interestingly, the problem vanishes if border collapse is turned off.
+    // For further information, see: https://stackoverflow.com/a/61703642
+    table {
+        // There are problems with sticky thead and borders.
+        // For details, see highest upvoted comment on: https://stackoverflow.com/a/53559396
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    &.student {
+        thead {
+            background: #f9f9f9;
+            position: sticky;
+            top: 0;
+
+            // Necessary because otherwise unchecked items (with lower opacity) overlap thead.
+            z-index: 1;
+        }
+
+        td,
+        th {
+            &:nth-child(2) {
+                width: 4em;
+                padding-right: 1em;
+            }
+        }
+    }
+
+    .kpv {
+        text-align: center;
+        .value {
+            font-size: 3em;
+            line-height: 1.1;
+        }
+    }
+
+    .estimation-selection {
+        input[type='range'] {
+            vertical-align: middle;
+        }
+    }
+
+    #grade-goal-selection {
+        font-size: 1.6em;
+        border-width: 3px;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: inherit;
+        color: inherit;
+        background: inherit;
+    }
+
+    // Grey out the column with self-estimation sliders if task is unchecked.
+    tr.unchecked td:last-child {
+        opacity: 0.2;
+    }
+
+    .borderless {
+        tr,
+        td,
+        th {
+            border: none;
+        }
+    }
+
+    .grade-1 {
+        background-color: #cde9c6;
+    }
+    .grade-2 {
+        background-color: #cce6ea;
+    }
+    .grade-3 {
+        background-color: #f9f3c0;
+    }
+    .grade-4 {
+        background-color: #f4dcc1;
+    }
+    .grade-5 {
+        background-color: #f2bebe;
+    }
+
+    &.teacher {
+        $border-width: 1px;
+        $border: $border-width solid #ccc;
+
+        // This is used to highlight the today column.
+        $thick-border-width: 3px;
+        $thick-border: $thick-border-width solid #ccc;
+
+        $head-column-width: 5em;
+        $data-column-width: 3.8em; // This is a bit smaller than the widest content.
+
+        .visualisation div {
+            background-color: #f4f4f4;
+        }
+
+        table {
+            width: auto;
+        }
+
+        th,
+        td {
+            // This prevents scrolling cells to be visible behind the sticky cells.
+            background-color: $widget-background;
+
+            padding-bottom: 0;
+        }
+
+        // Height of bars.
+        tr:first-child td {
+            height: 14em;
+        }
+
+        tr:nth-child(n+2) {
+            th,
+            td {
+                padding-top: 0;
+            }
+        }
+
+        // Inner horizontal borders.
+        tr:nth-child(n+3) {
+            td,
+            th {
+                border-top: $border;
+            }
+        }
+
+        // Inner vertical border of last two rows.
+        tr:nth-last-child(-n+2) {
+            td,
+            th {
+                border-right: $border;
+                &:nth-child(-n+2) {
+                    border-right-width: $thick-border-width;
+                }
+            }
+            span:nth-child(n+2) {
+                border-left: $border;
+            }
+        }
+
+        // Topmost horizontal border.
+        tr:first-child {
+            td,
+            th {
+                &:nth-child(n+2) {
+                    border-top: $thick-border;
+                }
+                &:nth-child(n+5) {
+                    border-top-width: $border-width;
+                }
+            }
+        }
+
+        tr:nth-child(n+3) {
+            td,
+            th {
+                // Leftmost vertical border.
+                &:first-child {
+                    border-left: $border;
+                }
+
+                // Height of all cells except for the cells containing the bars.
+                height: 2em;
+            }
+        }
+
+        tr:last-child {
+            td,
+            th {
+                // Bottom border.
+                border-bottom: $border;
+                &:nth-child(2) {
+                    border-bottom-width: $thick-border-width;
+                }
+
+                // Reduce size of uppercase labels to stick out less.
+                &:nth-child(n+2) span {
+                    font-size: .9em;
+                }
+            }
+        }
+
+        th:first-child {
+            min-width: $head-column-width;
+            max-width: $head-column-width;
+        }
+
+        tr:nth-child(-n+3) {
+            td,
+            th {
+                // Inner vertical borders of first four rows.
+                &:nth-child(3n+1) {
+                    border-right: $border;
+                }
+                &:first-child,
+                &:nth-child(4) {
+                    border-right-width: $thick-border-width;
+                }
+
+                // Specify width of data columns.
+                &:nth-child(n+1) {
+                    // Could not find a way to solve this with ‘width’, always takes the width of the widest content.
+                    min-width: $data-column-width;
+                    max-width: $data-column-width;
+
+                    // Compensate small column width and prevent vertical scrollbar on Chrome.
+                    overflow: hidden;
+                }
+
+                // Make head column and today’s data sticky.
+                &:nth-child(-n+4) {
+                    position: sticky;
+                    left: 0;
+                }
+                &:nth-child(2) {
+                    left: $head-column-width;
+                }
+                &:nth-child(3) {
+                    left: $head-column-width + $data-column-width;
+                }
+                &:nth-child(4) {
+                    left: $head-column-width + $data-column-width * 2;
+                }
+            }
+        }
+
+        // Make head column and today’s data sticky.
+        tr:nth-last-child(-n+2) {
+            td,
+            th {
+                &:nth-child(-n+2) {
+                    position: sticky;
+                    left: 0;
+                }
+                &:nth-child(2) {
+                    left: $head-column-width;
+                }
+            }
+        }
+
+        // Header row Percent.
+        tr:nth-child(4) {
+            th,
+            td {
+                background-color: #ebebeb;
+            }
+        }
+    }
+}

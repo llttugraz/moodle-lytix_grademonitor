@@ -1,0 +1,223 @@
+#grademonitor col.average {
+    width: 3.5em;
+}
+
+#grademonitor thead {
+    line-height: 1.1;
+    font-size: 0.85em;
+}
+
+#grademonitor .table-container {
+    overflow: auto;
+    max-height: 60vh;
+}
+
+#grademonitor table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#grademonitor.student thead {
+    background: #f9f9f9;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#grademonitor.student td:nth-child(2),
+#grademonitor.student th:nth-child(2) {
+    width: 4em;
+    padding-right: 1em;
+}
+
+#grademonitor .kpv {
+    text-align: center;
+}
+
+#grademonitor .kpv .value {
+    font-size: 3em;
+    line-height: 1.1;
+}
+
+#grademonitor .estimation-selection input[type=range] {
+    vertical-align: middle;
+}
+
+#grademonitor #grade-goal-selection {
+    font-size: 1.6em;
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: inherit;
+    color: inherit;
+    background: inherit;
+}
+
+#grademonitor tr.unchecked td:last-child {
+    opacity: 0.2;
+}
+
+#grademonitor .borderless tr,
+#grademonitor .borderless td,
+#grademonitor .borderless th {
+    border: none;
+}
+
+#grademonitor .grade-1 {
+    background-color: #cde9c6;
+}
+
+#grademonitor .grade-2 {
+    background-color: #cce6ea;
+}
+
+#grademonitor .grade-3 {
+    background-color: #f9f3c0;
+}
+
+#grademonitor .grade-4 {
+    background-color: #f4dcc1;
+}
+
+#grademonitor .grade-5 {
+    background-color: #f2bebe;
+}
+
+#grademonitor.teacher .visualisation div {
+    background-color: #f4f4f4;
+}
+
+#grademonitor.teacher table {
+    width: auto;
+}
+
+#grademonitor.teacher th,
+#grademonitor.teacher td {
+    background-color: #fbfafa;
+    padding-bottom: 0;
+}
+
+#grademonitor.teacher tr:first-child td {
+    height: 14em;
+}
+
+#grademonitor.teacher tr:nth-child(n+2) th,
+#grademonitor.teacher tr:nth-child(n+2) td {
+    padding-top: 0;
+}
+
+#grademonitor.teacher tr:nth-child(n+3) td,
+#grademonitor.teacher tr:nth-child(n+3) th {
+    border-top: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:nth-last-child(-n+2) td,
+#grademonitor.teacher tr:nth-last-child(-n+2) th {
+    border-right: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:nth-last-child(-n+2) td:nth-child(-n+2),
+#grademonitor.teacher tr:nth-last-child(-n+2) th:nth-child(-n+2) {
+    border-right-width: 3px;
+}
+
+#grademonitor.teacher tr:nth-last-child(-n+2) span:nth-child(n+2) {
+    border-left: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:first-child td:nth-child(n+2),
+#grademonitor.teacher tr:first-child th:nth-child(n+2) {
+    border-top: 3px solid #ccc;
+}
+
+#grademonitor.teacher tr:first-child td:nth-child(n+5),
+#grademonitor.teacher tr:first-child th:nth-child(n+5) {
+    border-top-width: 1px;
+}
+
+#grademonitor.teacher tr:nth-child(n+3) td,
+#grademonitor.teacher tr:nth-child(n+3) th {
+    height: 2em;
+}
+
+#grademonitor.teacher tr:nth-child(n+3) td:first-child,
+#grademonitor.teacher tr:nth-child(n+3) th:first-child {
+    border-left: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:last-child td,
+#grademonitor.teacher tr:last-child th {
+    border-bottom: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:last-child td:nth-child(2),
+#grademonitor.teacher tr:last-child th:nth-child(2) {
+    border-bottom-width: 3px;
+}
+
+#grademonitor.teacher tr:last-child td:nth-child(n+2) span,
+#grademonitor.teacher tr:last-child th:nth-child(n+2) span {
+    font-size: 0.9em;
+}
+
+#grademonitor.teacher th:first-child {
+    min-width: 5em;
+    max-width: 5em;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(3n+1),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(3n+1) {
+    border-right: 1px solid #ccc;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:first-child,
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(4),
+#grademonitor.teacher tr:nth-child(-n+3) th:first-child,
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(4) {
+    border-right-width: 3px;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(n+1),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(n+1) {
+    min-width: 3.8em;
+    max-width: 3.8em;
+    overflow: hidden;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(-n+4),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(-n+4) {
+    position: sticky;
+    left: 0;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(2),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(2) {
+    left: 5em;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(3),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(3) {
+    left: 8.8em;
+}
+
+#grademonitor.teacher tr:nth-child(-n+3) td:nth-child(4),
+#grademonitor.teacher tr:nth-child(-n+3) th:nth-child(4) {
+    left: 12.6em;
+}
+
+#grademonitor.teacher tr:nth-last-child(-n+2) td:nth-child(-n+2),
+#grademonitor.teacher tr:nth-last-child(-n+2) th:nth-child(-n+2) {
+    position: sticky;
+    left: 0;
+}
+
+#grademonitor.teacher tr:nth-last-child(-n+2) td:nth-child(2),
+#grademonitor.teacher tr:nth-last-child(-n+2) th:nth-child(2) {
+    left: 5em;
+}
+
+#grademonitor.teacher tr:nth-child(4) th,
+#grademonitor.teacher tr:nth-child(4) td {
+    background-color: #ebebeb;
+}
+

@@ -1,0 +1,70 @@
+{{!
+  This file is part of Moodle - http://moodle.org/
+
+  Moodle is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  Moodle is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+  @template lytix_grademonitor/grademonitor
+
+  Lytix Grade Monitor
+
+  This template renders the actual content of the teacher’s view.
+
+  Classes required for JS:
+  * lytix_grademonitor/teachers-view
+
+  Context variables required for this template:
+  See example below.
+
+  Example context (json):
+  {
+    "Goals": [ 3, 5, 10, 3, 0 ],
+    "Estimations": [ 2, 6, 7, 5, 1 ],
+    "Grades": [ 0, 2, 8, 2, 3 ]
+  }
+}}
+
+<table class='table table-striped table-sm text-center table-bordered'>
+    <colgroup>
+        <col style='width: 40%;'>
+        <col style='width: 12%;'>
+        <col style='width: 12%;'>
+        <col style='width: 12%;'>
+        <col style='width: 12%;'>
+        <col style='width: 12%;'>
+    </colgroup>
+    <thead class='text-uppercase'>
+        <tr>
+            <th rowspan='2'></th>
+            <th colspan='5'>{{#str}}th_students_per_grade, lytix_grademonitor{{/str}}</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#rows}}
+        <tr>
+            <th class='text-right font-weight-bold text-capitalize'>{{title}}</th>
+            {{#counts}}<td>{{.}}</td>{{/counts}}
+        </tr>
+        {{/rows}}
+    </tbody>
+</table>
+
+<p>{{#str}}description, lytix_grademonitor{{/str}}</p>
