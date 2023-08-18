@@ -1,5 +1,5 @@
 {
-    "name": "llttugraz/moodle-lytix_grademonitor",
+    "name": "llttugraz/lytix_grademonitor",
     "description": "Logs the interactions with the widgets.",
     "keywords": [
         "moodle",
