@@ -33,27 +33,21 @@
      "contextid": 0,
      "courseid": 0,
      "userid": 0,
-	  "locale": "de_utf8"
+     "locale": "de_utf8",
+     "widgetheading": 3
   }
 }}
-
 <div id='grademonitor' class='widget loading {{^isteacher}}student{{/isteacher}}{{#isteacher}}teacher{{/isteacher}}'>
-    <h3>{{#str}} widget_name, lytix_grademonitor {{/str}}</h3>
+    <h{{{widgetheading}}}>{{#str}} widget_name, lytix_grademonitor {{/str}}</h{{{widgetheading}}}>
     <div class='content d-flex flex-column justify-content-around p-3 p-b-0'></div>
 </div>
-
 {{#isteacher}}
 {{#js}}
-    require(['lytix_grademonitor/teachers-details'], function(m) {
-        m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}');
-    });
+require(['lytix_grademonitor/teachers-details'], m => m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}'));
 {{/js}}
 {{/isteacher}}
-
 {{^isteacher}}
 {{#js}}
-    require(['lytix_grademonitor/grademonitor'], function(m) {
-        m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}');
-    });
+require(['lytix_grademonitor/grademonitor'], m => m.init({{contextid}}, {{userid}}, {{courseid}}, '{{locale}}'));
 {{/js}}
 {{/isteacher}}
