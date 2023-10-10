@@ -1,5 +1,5 @@
 {
-    "name": "llttugraz-lytix/moodle-lytix_grademonitor",
+    "name": "llttugraz/moodle-lytix_grademonitor",
     "description": "Logs the interactions with the widgets.",
     "keywords": [
         "moodle",
@@ -19,10 +19,10 @@
         }
     ],
     "require": {
-        "moodle/moodle": "3.11 - 4.1",
+        "moodle/moodle": "4.1.x",
         "llttugraz/moodle-local_lytix": "*",
-        "llttugraz-lytix/moodle-lytix_helper": "*",
-        "llttugraz-lytix/moodle-lytix_logs": "*",
-        "llttugraz-lytix/moodle-lytix_config": "*"
+        "llttugraz/moodle-lytix_helper": "*",
+        "llttugraz/moodle-lytix_logs": "*",
+        "llttugraz/moodle-lytix_config": "*"
     }
 }
