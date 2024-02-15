@@ -2,6 +2,14 @@
 
 This is a tool for students to plan and estimate their performance by estimating their grades. Teachers see the development of students’ goals, estimations and grades over time.
 
+## ARCHIVED PROJECT
+
+This project has been archived and is no longer being maintained or developed by our team. We have made the decision to cease work on this plugin to focus our efforts on other projects that align more closely with our current goals and priorities.
+
+What does this mean?
+1. No More Updates: The plugin will no longer receive updates, including feature enhancements, bug fixes, or security patches.
+2. No Support: We will not be providing official support for this plugin going forward. The repository will remain available in a read-only state for archival purposes.
+3. Community Forking: While we will not be actively maintaining the project, we encourage the community to fork and continue its development if they find it useful. We hope this plugin can still serve as a valuable resource or inspiration for future projects.
 
 ## JSON
 
